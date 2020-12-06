@@ -75,4 +75,31 @@ public class Restaurant {
     }
 
 
+
+    public List<Item> getSelectedMenuItems() {
+        List<Item> selectedMenuItems = new ArrayList<Item>();
+
+        if (menu!=null && menu.size()>0)
+            for (Item item : menu) {
+                if (item.isItemSelected()) {
+                    selectedMenuItems.add(item);
+                }
+            }
+
+        return selectedMenuItems;
+    }
+
+    public int calculateSpendingPriceOnSelectedItems() {
+        int calculateSpendingPrice = 0;
+        List<Item> selectedMenuItems=getSelectedMenuItems();
+
+        if (selectedMenuItems!=null && selectedMenuItems.size()>0)
+            for (Item item : selectedMenuItems) {
+                calculateSpendingPrice = calculateSpendingPrice + item.getPrice();
+            }
+
+        return calculateSpendingPrice;
+
+    }
+
 }
