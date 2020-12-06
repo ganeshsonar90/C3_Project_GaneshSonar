@@ -65,6 +65,29 @@ class RestaurantTest {
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
+    @Test
+    public void calculation_of_spending_price_onselected_items_should_be_correct() {
+
+        getResturantWithOnlyTimings();
+        restaurant.addToMenu("Sweet corn soup", 100);
+        restaurant.addToMenu("Vegetable lasagne", 200);
+        restaurant.addToMenu("Hot and Sour soup", 300);
+        restaurant.addToMenu("Manchow soup", 400);
+
+        Restaurant restaurantSpy = Mockito.spy(restaurant);
+        //consider first two item select
+        List<Item> selectedMenuItems = restaurantSpy.getMenu().subList(0, 2);
+
+        Mockito.when(restaurantSpy.getSelectedMenuItems()).thenReturn(selectedMenuItems);
+
+        int totalSpendingPrice = restaurantSpy.calculateSpendingPriceOnSelectedItems();
+
+        assertEquals(300, totalSpendingPrice);
+
+
+    }
+
+
 
     private void getResturantWithOnlyTimings() {
         LocalTime openingTime = LocalTime.parse("10:30:00");
